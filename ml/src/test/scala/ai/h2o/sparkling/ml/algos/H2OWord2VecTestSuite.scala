@@ -82,6 +82,9 @@ class H2OWord2VecTestSuite extends FunSuite with Matchers with SharedH2OTestCont
       .setSentSampleRate(0)
       .setEpochs(10)
       .setFeaturesCols(Array("one", "two"))
-    w2v.fit(trainingDataset)
+    val thrown = intercept[IllegalArgumentException] {
+      w2v.fit(trainingDataset)
+    }
+    assert(thrown.getMessage == "Only one feature column is allowed as the input to H2OWord2Vec")
   }
 }
