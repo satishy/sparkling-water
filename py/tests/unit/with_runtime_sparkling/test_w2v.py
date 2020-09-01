@@ -37,10 +37,10 @@ def testParamsPassedBySetters():
 def testPipelineSerialization(craiglistDataset):
     [traningDataset, testingDataset] = craiglistDataset.randomSplit([0.9, 0.1], 42)
 
-    tokenizer = RegexTokenizer(inputCol="jobtitle", minTokenLength=2)
-    stopWordsRemover = StopWordsRemover(inputCol=tokenizer.getOutputCol())
-    w2v = H2OWord2Vec(sentSampleRate=0, epochs=0, featuresCol=stopWordsRemover.getOutputCol())
-    gbm = H2OGBM(labelCol="category", featuresCol="prediction") # w2v output column
+    tokenizer = RegexTokenizer(inputCol="jobtitle", minTokenLength=2, outputCol="tokenized")
+    stopWordsRemover = StopWordsRemover(inputCol=tokenizer.getOutputCol(), outputCol="stopWordsRemoved")
+    w2v = H2OWord2Vec(sentSampleRate=0, epochs=10, featuresCols=[stopWordsRemover.getOutputCol()])
+    gbm = H2OGBM(labelCol="category", featuresCols=["prediction"]) # w2v output column
 
     pipeline = Pipeline(stages=[tokenizer, stopWordsRemover, w2v, gbm])
 

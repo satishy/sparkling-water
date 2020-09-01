@@ -15,19 +15,6 @@
 # limitations under the License.
 #
 
-from ai.h2o.sparkling.ml.params.H2OTypeConverters import H2OTypeConverters
-from pyspark.ml.param import *
 
-
-class HasPreTrained(Params):
-    preTrained = Param(
-        Params._dummy(),
-        "preTrained",
-        "Spark data frame that contains a pre-trained (external) word2vec model.",
-        H2OTypeConverters.toNullableDataFrame())
-
-    def getPreTrained(self):
-        return self.getOrDefault(self.preTrained)
-
-    def setPreTrained(self, value):
-        return self._set(preTrained=value)
+class H2OWord2VecExtras:
+    pass
