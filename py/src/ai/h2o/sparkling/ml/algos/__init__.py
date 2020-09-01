@@ -27,3 +27,4 @@ from ai.h2o.sparkling.ml.algos.H2ODRF import H2ODRF
 from ai.h2o.sparkling.ml.algos.H2OGLRM import H2OGLRM
 from ai.h2o.sparkling.ml.algos.H2OPCA import H2OPCA
 from ai.h2o.sparkling.ml.algos.H2OIsolationForest import H2OIsolationForest
+from ai.h2o.sparkling.ml.algos.H2OWord2Vec import H2OWord2Vec
