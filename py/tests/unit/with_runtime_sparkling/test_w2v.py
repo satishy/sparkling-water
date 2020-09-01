@@ -56,5 +56,5 @@ def testPipelineSerialization(craiglistDataset):
     unit_test_utils.assert_data_frames_are_identical(expected, result)
 
 
-def testPreTrained(birdsDataset):
+def testPreTrained(craiglistDataset):
     pass
