@@ -99,13 +99,13 @@ The following sections describe how to train the Word2Vec model in Sparkling Wat
 
         .. code:: python
 
-            from pysparkling.ml import H2OGBM, Word2Vec
+            from pysparkling.ml import H2OGBM, H2OWord2Vec
             from pyspark.ml.feature import RegexTokenizer, StopWordsRemover
 
             tokenizer = RegexTokenizer(inputCol="jobtitle", minTokenLength=2)
             stopWordsRemover = StopWordsRemover(inputCol=tokenizer.getOutputCol())
             w2v = H2OWord2Vec(sentSampleRate=0, epochs=0, featuresCol=stopWordsRemover.getOutputCol())
-            gbm = H2OGBM(labelCol="category", featuresCol="prediction") // w2v output column
+            gbm = H2OGBM(labelCol="category", featuresCol="prediction") # w2v output column
 
             pipeline = Pipeline(stages=[tokenizer, stopWordsRemover, w2v, gbm])
 

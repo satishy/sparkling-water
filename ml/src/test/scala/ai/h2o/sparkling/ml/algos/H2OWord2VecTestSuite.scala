@@ -89,8 +89,6 @@ class H2OWord2VecTestSuite extends FunSuite with Matchers with SharedH2OTestCont
     assert(actual.sameElements(expected))
   }
 
-  test("Word2Vec with pre-trained model") {}
-
   test("Word2Vec with multiple feature columns") {
     val w2v = new H2OWord2Vec()
       .setSentSampleRate(0)
