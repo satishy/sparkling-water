@@ -15,6 +15,19 @@
 # limitations under the License.
 #
 
-from ai.h2o.sparkling.ml.features import H2OTargetEncoder, ColumnPruner
+from ai.h2o.sparkling.ml.params.H2OTypeConverters import H2OTypeConverters
+from pyspark.ml.param import *
 
-__all__ = ["ColumnPruner", "H2OTargetEncoder"]
+
+class HasPreTrained(Params):
+    userX = Param(
+        Params._dummy(),
+        "preTrained",
+        "Spark data frame that contains a pre-trained (external) word2vec model.",
+        H2OTypeConverters.toNullableDataFrame())
+
+    def getPreTrained(self):
+        return self.getOrDefault(self.preTrained)
+
+    def setPreTrained(self, value):
+        return self._set(preTrained=value)

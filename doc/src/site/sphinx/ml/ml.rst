@@ -15,6 +15,7 @@ Machine Learning
    sw_glrm
    sw_pca
    sw_isolation_forest
+   sw_w2v
 
 **Transformers**
 

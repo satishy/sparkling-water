@@ -39,6 +39,7 @@ import hex.tree.drf.DRFModel.DRFParameters
 import hex.tree.isofor.IsolationForestModel.IsolationForestParameters
 import hex.tree.gbm.GBMModel.GBMParameters
 import hex.tree.xgboost.XGBoostModel.XGBoostParameters
+import hex.word2vec.Word2VecModel.Word2VecParameters
 import water.automl.api.schemas3.AutoMLBuildSpecV99._
 
 object Runner {
@@ -87,6 +88,7 @@ object Runner {
       ExplicitField("initial_biases", "HasInitialBiases", null),
       ExplicitField("initial_weights", "HasInitialWeights", null),
       ignoredCols)
+    val pretrainedW2V = ExplicitField("pre_trained", "HasPreTrained", null)
     type DeepLearningParametersV3 = DeepLearningV3.DeepLearningParametersV3
     type IsolationForestParametersV3 = IsolationForestV3.IsolationForestParametersV3
 
@@ -107,7 +109,8 @@ object Runner {
       ("H2OGLRMParams", classOf[GLRMV3.GLRMParametersV3], classOf[GLRMParameters], Seq(userX, userY, lossByColNames)),
       ("H2OGAMParams", classOf[GAMV3.GAMParametersV3], classOf[GAMParameters], gamFields),
       ("H2OPCAParams", classOf[PCAV3.PCAParametersV3], classOf[PCAParameters], pcaFields),
-      ("H2OIsolationForestParams", classOf[IsolationForestParametersV3], classOf[IsolationForestParameters], ifFields))
+      ("H2OIsolationForestParams", classOf[IsolationForestParametersV3], classOf[IsolationForestParameters], ifFields),
+      ("H2OWord2VecParams", classOf[Word2VecV3.Word2VecParametersV3], classOf[Word2VecParameters], Seq(pretrainedW2V)))
 
     for ((entityName, h2oSchemaClass: Class[_], h2oParameterClass: Class[_], explicitFields) <- algorithmParameters)
       yield ParameterSubstitutionContext(
@@ -126,7 +129,8 @@ object Runner {
   }
 
   private def isUnsupervised(entityName: String): Boolean = {
-    Array("H2OGLRMParams", "H2OKMeansParams", "H2OPCAParams", "H2OIsolationForestParams").contains(entityName)
+    Array("H2OGLRMParams", "H2OKMeansParams", "H2OPCAParams", "H2OIsolationForestParams", "H2OWord2Vec").contains(
+      entityName)
   }
 
   private def algorithmConfiguration: Seq[AlgorithmSubstitutionContext] = {
@@ -142,7 +146,8 @@ object Runner {
       ("H2OGLRM", classOf[GLRMParameters], "H2OUnsupervisedAlgorithm", Seq.empty),
       ("H2OGAM", classOf[GAMParameters], "H2OSupervisedAlgorithm", Seq.empty),
       ("H2OPCA", classOf[PCAParameters], "H2OUnsupervisedAlgorithm", Seq.empty),
-      ("H2OIsolationForest", classOf[IsolationForestParameters], "H2OTreeBasedUnsupervisedAlgorithm", Seq.empty))
+      ("H2OIsolationForest", classOf[IsolationForestParameters], "H2OTreeBasedUnsupervisedAlgorithm", Seq.empty),
+      ("H2OWord2Vec", classOf[Word2VecParameters], "H2OUnsupervisedAlgorithm", Seq("H2OWord2VecExtras")))
 
     for ((entityName, h2oParametersClass: Class[_], algorithmType, extraParents) <- algorithms)
       yield AlgorithmSubstitutionContext(
