@@ -82,7 +82,7 @@ class H2OWord2VecTestSuite extends FunSuite with Matchers with SharedH2OTestCont
       "accounting",
       "accounting",
       "accounting",
-      "administrative",
+      "customerservice",
       "accounting",
       "accounting",
       "accounting")
