@@ -31,7 +31,8 @@ object IgnoredParameters {
   val unimplemented = Seq(
     "__meta", // just for internal purposes
     "checkpoint", // GBM, DRF, XGBoost, Deep Learning
-    "interaction_pairs") // GLM, GAM
+    "interaction_pairs", // GLM, GAM
+    "pre_trained") // Word2Vec, does not fit into SW API
 
   val unsupervisedAlgos = Seq("response_column", "offset_column")
 

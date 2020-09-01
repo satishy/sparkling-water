@@ -24,6 +24,7 @@ from pysparkling.ml import H2OGBM, H2OWord2Vec
 
 from tests import unit_test_utils
 from tests.unit.with_runtime_sparkling.algo_test_utils import *
+import h2o
 
 
 def testParamsPassedByConstructor():
@@ -54,7 +55,3 @@ def testPipelineSerialization(craiglistDataset):
     result = loadedModel.transform(testingDataset)
 
     unit_test_utils.assert_data_frames_are_identical(expected, result)
-
-
-def testPreTrained(craiglistDataset):
-    pass

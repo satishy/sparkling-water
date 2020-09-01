@@ -88,7 +88,6 @@ object Runner {
       ExplicitField("initial_biases", "HasInitialBiases", null),
       ExplicitField("initial_weights", "HasInitialWeights", null),
       ignoredCols)
-    val pretrainedW2V = ExplicitField("pre_trained", "HasPreTrained", null)
     type DeepLearningParametersV3 = DeepLearningV3.DeepLearningParametersV3
     type IsolationForestParametersV3 = IsolationForestV3.IsolationForestParametersV3
 
@@ -110,7 +109,7 @@ object Runner {
       ("H2OGAMParams", classOf[GAMV3.GAMParametersV3], classOf[GAMParameters], gamFields),
       ("H2OPCAParams", classOf[PCAV3.PCAParametersV3], classOf[PCAParameters], pcaFields),
       ("H2OIsolationForestParams", classOf[IsolationForestParametersV3], classOf[IsolationForestParameters], ifFields),
-      ("H2OWord2VecParams", classOf[Word2VecV3.Word2VecParametersV3], classOf[Word2VecParameters], Seq(pretrainedW2V)))
+      ("H2OWord2VecParams", classOf[Word2VecV3.Word2VecParametersV3], classOf[Word2VecParameters], Seq()))
 
     for ((entityName, h2oSchemaClass: Class[_], h2oParameterClass: Class[_], explicitFields) <- algorithmParameters)
       yield ParameterSubstitutionContext(
