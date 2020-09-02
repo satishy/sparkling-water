@@ -74,18 +74,11 @@ class H2OWord2VecTestSuite extends FunSuite with Matchers with SharedH2OTestCont
     val model = getPipeline().fit(trainingDataset)
     val result = model.transform(testingDataset)
     import spark.implicits._
-    val actual = result.select("prediction").map(row => row.getString(0)).take(10)
+    val actual = result.select("prediction").map(row => row.getString(0)).take(3)
     val expected = Array(
       "accounting",
       "accounting",
-      "administrative",
-      "accounting",
-      "accounting",
-      "accounting",
-      "customerservice",
-      "accounting",
-      "accounting",
-      "accounting")
+      "administrative")
     assert(actual.sameElements(expected))
   }
 
