@@ -104,7 +104,7 @@ The following sections describe how to train the Word2Vec model in Sparkling Wat
 
             tokenizer = RegexTokenizer(inputCol="jobtitle", minTokenLength=2)
             stopWordsRemover = StopWordsRemover(inputCol=tokenizer.getOutputCol())
-            w2v = H2OWord2Vec(sentSampleRate=0, epochs=0, featuresCol=stopWordsRemover.getOutputCol())
+            w2v = H2OWord2Vec(sentSampleRate=0, epochs=10, featuresCol=stopWordsRemover.getOutputCol())
             gbm = H2OGBM(labelCol="category", featuresCol="prediction") # w2v output column
 
             pipeline = Pipeline(stages=[tokenizer, stopWordsRemover, w2v, gbm])

@@ -60,7 +60,7 @@ class H2OFrame private (
   }
 
   def convertColumnsToStrings(columnIndices: Array[Int]): H2OFrame = {
-    val nonExisting = columnIndices.filterNot(columns.indices.contains(_))
+    val nonExisting = columnIndices.filterNot(columns.indices.contains)
     if (nonExisting.nonEmpty) {
       throw new IllegalArgumentException(
         s"Columns with indices ${nonExisting.mkString("[", ",", "]")} are not in the frame $frameId." +
