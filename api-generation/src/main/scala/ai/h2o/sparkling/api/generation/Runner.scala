@@ -150,7 +150,7 @@ object Runner {
 
     for ((entityName, h2oParametersClass: Class[_], algorithmType, extraParents) <- algorithms)
       yield AlgorithmSubstitutionContext(
-        namespace = "ai.h2o.sparkling.ml.algos",
+        namespace = if (entityName == "H2OWord2Vec") "ai.h2o.sparkling.ml.features" else "ai.h2o.sparkling.ml.algos",
         entityName,
         h2oParametersClass,
         algorithmType,

@@ -35,7 +35,9 @@ object AlgorithmTemplate
       s"ai.h2o.sparkling.ml.params.${entityName}Params",
       "ai.h2o.sparkling.ml.utils.H2OParamsReadable",
       algorithmSubstitutionContext.h2oSchemaClass.getCanonicalName,
-      "org.apache.spark.ml.util.Identifiable")
+      "org.apache.spark.ml.util.Identifiable") ++ (if (entityName == "H2OWord2Vec")
+                                                     Seq("ai.h2o.sparkling.ml.algos.H2OUnsupervisedAlgorithm")
+                                                   else Nil)
 
     val parameters = "(override val uid: String)"
 

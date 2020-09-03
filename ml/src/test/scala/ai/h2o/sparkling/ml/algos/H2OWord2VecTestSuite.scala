@@ -17,6 +17,7 @@
 
 package ai.h2o.sparkling.ml.algos
 
+import ai.h2o.sparkling.ml.features.H2OWord2Vec
 import ai.h2o.sparkling.{SharedH2OTestContext, TestUtils}
 import org.apache.spark.ml.feature.{RegexTokenizer, StopWordsRemover}
 import org.apache.spark.ml.{Pipeline, PipelineModel}

@@ -15,7 +15,6 @@ Machine Learning
    sw_glrm
    sw_pca
    sw_isolation_forest
-   sw_w2v
 
 **Transformers**
 
@@ -23,6 +22,8 @@ Machine Learning
    :maxdepth: 2
 
    sw_target_encoder
+   sw_w2v
+
 
 **Uncategorized**
 
